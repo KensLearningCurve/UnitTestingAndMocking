@@ -1,6 +1,6 @@
 ﻿using DatabaseLib;
+using DatabaseLib.Entities;
 using ExampleClass.Exceptions;
-using ExampleClass.Models;
 
 namespace ExampleClass
 {
@@ -15,7 +15,12 @@ namespace ExampleClass
 
         public IEnumerable<Movie> GetAll()
         {
-            return movieRepository.GetAll().ToList();
+            List<Movie> result = movieRepository.GetAll().ToList();
+
+            if (result == null)
+                throw new Exception("Nothing found!");
+
+            return result;
         }
 
         public Movie? Get(int id)
